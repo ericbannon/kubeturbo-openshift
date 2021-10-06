@@ -1,0 +1,66 @@
+###NOTE: For reference to permissions used in role. Not meant for direct deployment. Please deploy the operator into your cluster ###
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v2
+metadata:
+  name: kubeturbo-operator.v8.3.2-example
+  namespace: turbo
+  labels:
+    olm.owner: kubeturbo-operator.v8.3.2
+    olm.owner.kind: ClusterServiceVersion
+    olm.owner.namespace: turbo
+    operators.coreos.com/kubeturbo-certified.turbo: ''
+rules:
+  - verbs:
+      - '*'
+    apiGroups:
+      - ''
+      - apps
+      - extensions
+    resources:
+      - nodes
+      - pods
+      - configmaps
+      - endpoints
+      - events
+      - deployments
+      - persistentvolumeclaims
+      - replicasets
+      - replicationcontrollers
+      - services
+      - secrets
+      - serviceaccounts
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+      - apps
+      - extensions
+      - policy
+    resources:
+      - daemonsets
+      - endpoints
+      - limitranges
+      - namespaces
+      - persistentvolumes
+      - persistentvolumeclaims
+      - poddisruptionbudget
+      - resourcequotas
+      - services
+      - statefulsets
+  - verbs:
+      - get
+    apiGroups:
+      - ''
+    resources:
+      - nodes/spec
+      - nodes/stats
+  - verbs:
+      - '*'
+    apiGroups:
+      - charts.helm.k8s.io
+    resources:
+      - '*'
+
