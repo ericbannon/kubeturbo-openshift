@@ -2,11 +2,11 @@
 
 The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturb "Kubeturbo Operator") can be quickly installed on your Openshfit cluster(s). This can be done through Openshift Console under the operator catalog, or directly through the CLI. Kubeturbo will run as a single pod deployment, with the following resources:
 
-Namespace or Project (default is turbo)
-Service Account
-Role binding defined
-ConfigMap for kubeturbo to connect to the Turbonomic server
-Deployment of kubeturbo Pod
+* Namespace or Project (default is turbo)
+* Service Account
+* Role binding defined
+* ConfigMap for kubeturbo to connect to the Turbonomic server
+* Deployment of kubeturbo Pod
 
 
 ## Requirements
