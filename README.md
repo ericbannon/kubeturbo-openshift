@@ -22,6 +22,7 @@ The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturb "Kubeturbo Ope
   * namespace
   * service account,
   * cluster role binding for the service account.
+   * Note: kubeturbo will run the with the [following cluster level permissions](https://github.com/ericbannon/kubeturbo-openshift/blob/main/deploy/clusterole.yaml "Permissions") 
 * Instructions assume the node you are deploying to has internet access to pull the kubeturbo image from the DockerHub repository, and your environment is configured with a repo accessible by the node.
   * (https://access.redhat.com/containers/#/registry.connect.redhat.com/turbonomic/kubeturbo)
 * Kubeturbo pod will have access to the kubelet on every node
