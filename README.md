@@ -1,5 +1,14 @@
 # kubeturbo-openshift
 
+The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturb "Kubeturbo Operator") can be quickly installed on your Openshfit cluster(s). This can be done through Openshift Console under the operator catalog, or directly through the CLI. Kubeturbo will run as a single pod deployment, with the following resources:
+
+Namespace or Project (default is turbo)
+Service Account
+Role binding defined
+ConfigMap for kubeturbo to connect to the Turbonomic server
+Deployment of kubeturbo Pod
+
+
 ## Requirements
 * Kubernetes version 1.8 or higher, OpenShift release 3.4 or higher, including any k8s upstream compliant distribution
 * Turbonomic Server version 5.9 or higher is installed, running, and the following information:
