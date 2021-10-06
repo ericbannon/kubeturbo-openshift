@@ -6,9 +6,10 @@
   * Turbonomic Server URL https://
   * Turbonomic username with administrator role, and password
   * Turbonomic Server Version. To get this from the UI, go to Settings -> Updates -> About and use the numeric version such as “6.2.11” or “6.3” (No minor version needed 6.3+. Build details not required) To determine Turbo Server, CWOM Server and the kubeturbo image tags, refer to Turbonomic - CWOM - Kubeturbo version mappings
-### Access and Permissions to create all the resources required:
-* User needs cluster-admin cluster role level access to be able to create the following resources if required: namespace, service account, and cluster role binding for the service account.
-### Repo Access and Network requirements. Refer to the Figure below “Turbonomic and Kubernetes Network Detail”.
+* User needs cluster-admin cluster role level access to be able to create the following resources if required: 
+  * namespace
+  * service account,
+  * cluster role binding for the service account.
 * Instructions assume the node you are deploying to has internet access to pull the kubeturbo image from the DockerHub repository, or your environment is configured with a repo accessible by the node.[RedHat Container Catalog] (https://access.redhat.com/containers/#/registry.connect.redhat.com/turbonomic/kubeturbo)
 * Kubeturbo pod will have access to the kubelet on every node
 * Network: https + port=10250 (default). Or http + port=10255.
