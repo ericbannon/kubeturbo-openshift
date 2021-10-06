@@ -1,6 +1,6 @@
 # kubeturbo-openshift
 
-The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturb "Kubeturbo Operator") can be quickly installed on your Openshfit cluster(s). This can be done through Openshift Console under the operator catalog, or directly through the CLI. Kubeturbo operator will run as a single pod deployment of kubeturbo per cluster, with the following resources installed in the Openshift Cluster:
+The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Operator") can be quickly installed on your Openshfit cluster(s). This can be done through Openshift Console under the operator catalog, or directly through the CLI. Kubeturbo operator will run as a single pod deployment of kubeturbo per cluster, with the following resources installed in the Openshift Cluster:
 
 * Custom Resource Definition (kubeturbo)
 * Namespace
