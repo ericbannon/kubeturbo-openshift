@@ -72,9 +72,7 @@ oc create ns turbonomic
 
 From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for turbonomic. Select the non-community, non-marketplace option. Proceed with the installation of the default configuration in your project. 
 
-![image](https://user-images.githubusercontent.com/34694236/136453772-80ffc2a5-6a8a-410d-9730-1ec1d5c5526d.png)
-
-You should now see the operator installed and running in your turbonomic project
+You should now see the operator installed and running in your turbonomic project.
 
 ##### From the CLI
 
@@ -122,9 +120,6 @@ oc adm policy add-scc-to-group anyuid system:serviceaccounts:turbonomic
 
 1. Go to Installed Operators, and click into the The Turbonomic Platform Operator that was installed in step 2
 2. Click 'create instance' under Provided APIs for turbonomic platform operator 
-
-![image](https://user-images.githubusercontent.com/34694236/136454150-98988dcc-7159-4ece-b991-349f666e2919.png)
-
 3. In the next screen, define the following values for the CRD
 
 Key                 |  Value                   | Description           
@@ -174,8 +169,6 @@ oc create ns turbo
 
 From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for kubeturbo. Select the non-community, non-marketplace option. Proceed with the installation of the default configuration in your project. 
 
-![image](https://user-images.githubusercontent.com/34694236/136431873-4f63f032-5198-445f-9b27-1bcefa65d820.png)
-
 ##### From the CLI 
 
 The Operator can also be easily installed through the CLI using an OperatorGroup and Subscription resource. More documentation on this can be found [here](https://docs.openshift.com/container-platform/4.8/operators/user/olm-installing-operators-in-namespace.html#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace "CLI install of operators")
@@ -190,7 +183,7 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/kubeturbo/kubeturbo-operatorsub.yaml
 ```
 
-You should now see the operator installed and running in your turbo project
+You should now see the operator installed and running in your turbo project. You can verify installation through the cli or through the Openshift Console. 
 
 #### Step 3: Create a kubeturbo CRD 
 
@@ -215,7 +208,7 @@ args.sccsupport                  | *                        | Include a value of
 
 ##### From the CLI 
 
-Using the sample provided [here](https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/kubeturbo/sample-crd-kubeturbo.yaml "kubeturbocrd"), modify the values listed above to your own. 
+Using the sample provided [here](https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/kubeturbo/sample-crd-kubeturbo.yaml "kubeturbocrd"), modify the appropriate values to your own. 
 
 1. Modify values 
 
@@ -227,18 +220,21 @@ metadata:
   name: kubeturbo-release
 spec:
   restAPIConfig:
-    opsManagerPassword: **<insert-your-password>**
+    opsManagerPassword: <insert-your-password>
     opsManagerUserName: administrator
   serverMeta:
-    turboServer: **'https://<insert-your-tc8s-topologyprocessing-route>'**
+    turboServer: 'https://<insert-your-tc8s-topologyprocessing-route>'
   targetConfig:
-    targetName: **<insert-a-cluster-name>**
+    targetName: <insert-a-cluster-name>
   args:
     sccsupport: '*'
 ```
 
--- INCOMPLETE. TO BE COMPLETED ... 
+2. Deploy the crd
 
-... 
+```
+oc create -f <your-modified-yaml> 
+```
 
+You can verify installation through the cli or through the Openshift Console. 
 
