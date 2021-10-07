@@ -78,7 +78,7 @@ You should now see the operator installed and running in your turbonomic project
 
 ##### From the CLI
 
-The Operator can also be easily installed through the CLI, or your automation tooling, using an OperatorGroup and Subscription resource. More documentation on this can be found [here](https://docs.openshift.com/container-platform/4.8/operators/user/olm-installing-operators-in-namespace.html#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace "CLI install of operators")
+The Operator can also be easily installed through the CLI using an OperatorGroup and Subscription resource. More documentation on this can be found [here](https://docs.openshift.com/container-platform/4.8/operators/user/olm-installing-operators-in-namespace.html#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace "CLI install of operators")
 
 1. Deploy the OperatorGroup 
 ```
@@ -116,7 +116,7 @@ Or, optionally, you can just change the security context of the project to the '
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:turbonomic
 ```
 
-#### Step 3: Create a CRD from the Installed Operator
+#### Step 3: Create a turbonomic CRD 
 
 ##### From the Openshift Console
 
@@ -178,7 +178,7 @@ From the Openshift Console, go to OperatorHub, select the project you just creat
 
 ##### From the CLI 
 
-The Operator can also be easily installed through the CLI, or your automation tooling, using an OperatorGroup and Subscription resource. More documentation on this can be found [here](https://docs.openshift.com/container-platform/4.8/operators/user/olm-installing-operators-in-namespace.html#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace "CLI install of operators")
+The Operator can also be easily installed through the CLI using an OperatorGroup and Subscription resource. More documentation on this can be found [here](https://docs.openshift.com/container-platform/4.8/operators/user/olm-installing-operators-in-namespace.html#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace "CLI install of operators")
 
 1. Deploy the OperatorGroup 
 ```
@@ -192,7 +192,9 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 
 You should now see the operator installed and running in your turbo project
 
-#### Step 3: Create a kubeturbo CRD resource from the Installed Operator
+#### Step 3: Create a kubeturbo CRD 
+
+##### From the Openshift Console
 
 1. Go to Installed Operators, and click into the Kubeturbo operator that was installed in step 2
 2. Click 'create instance' under Provided APIs for kubeturbo operator 
@@ -209,8 +211,31 @@ restAPIConfig.opsManagerPassword: | Turbo_password           | configured during
 targetConfig.targetName:         | Name_Each_Cluster        | a unique name for the managed kubeturbo cluster
 args.sccsupport                  | *                        | Include a value of * in order to enable support of actions that move container pods
 
-
 *Note: It is reccomended to configure the argument for sccsupport if you plan on testing move actions for pods* 
+
+##### From the CLI 
+
+Using the sample provided [here](https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/kubeturbo/sample-crd-kubeturbo.yaml "kubeturbocrd"), modify the values listed above to your own. 
+
+1. Modify values 
+
+```
+apiVersion: charts.helm.k8s.io/v1
+kind: Kubeturbo
+metadata:
+  namespace: turbo
+  name: kubeturbo-release
+spec:
+  restAPIConfig:
+    opsManagerPassword: **<insert-your-password>**
+    opsManagerUserName: administrator
+  serverMeta:
+    turboServer: **'https://<insert-your-tc8s-topologyprocessing-route>'**
+  targetConfig:
+    targetName: **<insert-a-cluster-name>**
+  args:
+    sccsupport: '*'
+```
 
 -- INCOMPLETE. TO BE COMPLETED ... 
 
