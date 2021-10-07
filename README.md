@@ -66,14 +66,31 @@ Create a namespace with the name 'turbonomic'.
 oc create ns turbonomic
 ```
 
-#### Step 2a: Deploy t8cs-operator through Openshift Console (preferred method)
+#### Step 2: Deploy the t8c-operator 
+
+##### From the Openshift Console
 
 From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for turbonomic. Select the non-community, non-marketplace option. Proceed with the installation of the default configuration in your project. 
 
 ![image](https://user-images.githubusercontent.com/34694236/136453772-80ffc2a5-6a8a-410d-9730-1ec1d5c5526d.png)
 
-#### Step 2b: Deploy the t8c-operator through the CLI 
+You should now see the operator installed and running in your turbonomic project
 
+##### From the CLI
+
+The Operator can also be easily installed through the CLI, or your automation tooling, using an OperatorGroup and Subscription resource. More documentation on this can be found [here](https://docs.openshift.com/container-platform/4.8/operators/user/olm-installing-operators-in-namespace.html#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace) "CLI install of operators")
+
+1. Deploy the OperatorGroup 
+```
+oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/t8c/t8c-operatorgroup.yaml
+```
+
+2. Deploy the Subscription 
+```
+oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/t8c/t8c-operatorsub.yaml
+```
+
+You should now see the operator installed and running in your turbonomic project
 
 #### Step 3: Create an xl-release CRD resource from the Installed Operator
 
