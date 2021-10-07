@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: kubeturbo
+  namespace: turbo
+spec:
+  targetNamespaces:
+  - turbo
