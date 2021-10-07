@@ -9,5 +9,7 @@ spec:
     externalArangoDBName: arangodb
     tag: 8.3.2
     customImageNames: false
+  nginxingress:
+    enabled: false
   openshiftingress:
     enabled: true
