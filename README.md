@@ -59,10 +59,11 @@ From the Openshift Console, go to OperatorHub, select the project you just creat
 
 Key                 |  Value                   | Description           
 -----------------   | --------------------     | -------------
-turboServer         | https://Turbo_server_URL | The turbonomic platform's https address (lb, route, external IP, etc...) 
-opsManagerUserName: | Turbo_username           | default is administrator
-opsManagerPassword: | Turbo_password           | configured during setup of t8c
-targetName:         | Name_Each_Cluster        | a unique name for the managed kubeturbo cluster
+serverMeta.turboServer         | https://Turbo_server_URL | The turbonomic platform's https address (lb, route, external IP, etc...) 
+restAPIConfig. opsManagerUserName: | Turbo_username           | default is administrator
+restAPIConfig.opsManagerPassword: | Turbo_password           | configured during setup of t8c
+targetConfig.targetName:         | Name_Each_Cluster        | a unique name for the managed kubeturbo cluster
+args.sccsupport                  | *                        | Include a value of * in order to enable support of actions that move container pods
 
 
 
