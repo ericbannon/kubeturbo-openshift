@@ -1,0 +1,13 @@
+apiVersion: charts.helm.k8s.io/v1
+kind: Xl
+metadata:
+  name: xl-release
+  namespace: turbonomic
+spec:
+  global:
+    repository: registry.connect.redhat.com/turbonomic
+    externalArangoDBName: arangodb
+    tag: 8.3.2
+    customImageNames: false
+  openshiftingress:
+    enabled: true

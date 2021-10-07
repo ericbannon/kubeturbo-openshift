@@ -1,0 +1,15 @@
+apiVersion: charts.helm.k8s.io/v1
+kind: Kubeturbo
+metadata:
+  namespace: turbo
+  name: kubeturbo-release
+spec:
+  restAPIConfig:
+    opsManagerPassword: <insert-your-password>
+    opsManagerUserName: administrator
+  serverMeta:
+    turboServer: 'https://<insert-your-tc8s-topologyprocessing-route>'
+  targetConfig:
+    targetName: <insert-a-cluster-name>
+  args:
+    sccsupport: '*'
