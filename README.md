@@ -1,6 +1,6 @@
 # Quickstart Install Guide: Turbonomic with Kubeturbo on Openshift 
 
-The following guide in intended to provide quick start intructions on how to install and configure Turbonomi with Kubeturbo on Openshift. For full intstructions on Multi-Node Deployment of Turbonomic on Kubernetes, please visit [The Turbonomic Wiki Instructions] (https://github.com/turbonomic/t8c-install/wiki/1.-Turbonomic-MultiNode-Deployment-Overview "tc8s instructions").
+The following guide in intended to provide quick start intructions on how to install and configure Turbonomi with Kubeturbo on Openshift. For full intstructions on Multi-Node Deployment of Turbonomic on Kubernetes, please visit [The Turbonomic Wiki Instructions](https://github.com/turbonomic/t8c-install/wiki/1.-Turbonomic-MultiNode-Deployment-Overview "tc8s instructions").
 
 ## Turbonomic 
 
