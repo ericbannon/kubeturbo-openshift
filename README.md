@@ -1,6 +1,6 @@
 # Quickstart Install Guide: Turbonomic with Kubeturbo on Openshift 
 
-The following guide in intended to provide quick start intructions on how to install and configure Turbonomic with Kubeturbo on Openshift. For full intstructions on Multi-Node Deployment of Turbonomic on Kubernetes, please visit the [Turbonomic Wiki Instructions](https://github.com/turbonomic/t8c-install/wiki/1.-Turbonomic-MultiNode-Deployment-Overview "tc8s instructions").
+The following guide in intended to provide quick start intructions on how to install and configure Turbonomic with Kubeturbo on Openshift using operators. For full intstructions on Multi-Node Deployment of Turbonomic on Kubernetes, please visit the [Turbonomic Wiki Instructions](https://github.com/turbonomic/t8c-install/wiki/1.-Turbonomic-MultiNode-Deployment-Overview "tc8s instructions").
 
 ![image](https://user-images.githubusercontent.com/34694236/136449047-31b6d00e-18f5-4854-86dd-c9dbd9c78948.png)
 
@@ -66,7 +66,7 @@ Create a namespace with the name 'turbonomic'.
 oc create ns turbonomic
 ```
 
-#### Step 2a: Deploy the t8c-operator 
+#### Step 2: Deploy the t8c-operator 
 
 ##### From the Openshift Console
 
@@ -90,7 +90,7 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 
 You should now see the operator installed and running in your turbonomic project
 
-#### Step 2b: Accomodate SCC, or Grant the turbonomic service account access to anyuid
+#### Step 3: Accomodate SCC, or Grant the turbonomic service account access to anyuid
 
 When deploying on Openshift, you need to use the group id from the uid-range assigned to the turbonomic project. This can be done by running ```oc describe project -n turbonomic``` and looking for the following annotations:
 
@@ -114,13 +114,13 @@ Or, optionally, you can just change the security context of the project to the '
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:turbonomic
 ```
 
-#### Step 3: Create a turbonomic CRD 
+#### Step 4: Create the Turbonomic CRD 
 
 ##### From the Openshift Console
 
-1. Go to Installed Operators, and click into the The Turbonomic Platform Operator that was installed in step 2
-2. Click 'create instance' under Provided APIs for turbonomic platform operator 
-3. In the next screen, define the following values for the CRD
+1. Go to Installed Operators, and click into the The Turbonomic Platform Operator that was installed in step 2.
+2. Click 'create instance' under Provided APIs for turbonomic platform operator. 
+3. In the next screen, define the following values for the CRD:
 
 Key                 |  Value                   | Description           
 -----------------            | --------------------     | -------------
