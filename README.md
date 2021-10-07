@@ -92,7 +92,18 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 
 You should now see the operator installed and running in your turbonomic project
 
-#### Step 2b: Grant the turbonomic service account access to anyuid SCC 
+#### Step 2b: Grant the turbonomic service account access SCC
+
+If you are deploying on Openshift, you need to use the group id from the uid-range assigned to the project:
+
+```
+spec:
+  global:
+    securityContext:
+      fsGroup: 1000630000
+```
+
+Or you can change the security context of the project to the 'anyuid' SCC:
 
 ```
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:turbonomic
