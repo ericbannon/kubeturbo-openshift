@@ -78,7 +78,7 @@ You should now see the operator installed and running in your turbonomic project
 
 ##### From the CLI
 
-The Operator can also be easily installed through the CLI, or your automation tooling, using an OperatorGroup and Subscription resource. More documentation on this can be found [here](https://docs.openshift.com/container-platform/4.8/operators/user/olm-installing-operators-in-namespace.html#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace) "CLI install of operators")
+The Operator can also be easily installed through the CLI, or your automation tooling, using an OperatorGroup and Subscription resource. More documentation on this can be found [here](https://docs.openshift.com/container-platform/4.8/operators/user/olm-installing-operators-in-namespace.html#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace "CLI install of operators")
 
 1. Deploy the OperatorGroup 
 ```
