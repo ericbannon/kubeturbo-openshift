@@ -1,4 +1,4 @@
-# Guide to Install & Configure Turbonomic (with Kubeturbo) on Openshift 
+# Quickstart Install Guide: Turbonomic with Kubeturbo on Openshift 
 
 ## Turbonomic 
 
