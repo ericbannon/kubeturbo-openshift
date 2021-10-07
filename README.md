@@ -59,10 +59,10 @@ From the Openshift Console, go to OperatorHub, select the project you just creat
 
 Key                 |  Value                   | Description           
 -----------------   | --------------------     | -------------
-turboServer         | https://Turbo_server_URL | 
-opsManagerUserName: | Turbo_username           |
-opsManagerPassword: | Turbo_password           | 
-targetName:         | Name_Each_Cluster        |
+turboServer         | https://Turbo_server_URL | The turbonomic platform's https address (lb, route, external IP, etc...) 
+opsManagerUserName: | Turbo_username           | default is administrator
+opsManagerPassword: | Turbo_password           | configured during setup of t8c
+targetName:         | Name_Each_Cluster        | a unique name for the managed kubeturbo cluster
 
 
 
