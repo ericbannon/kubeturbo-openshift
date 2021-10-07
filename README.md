@@ -58,6 +58,37 @@ The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Op
 
 ## I. Install The Turbonomic Platform
 
+#### Step 1: Create a namespace for turbonomic
+
+Create a namespace with the name 'turbonomic'. 
+
+```
+oc create ns turbonomic
+```
+
+#### Step 2a: Deploy t8cs-operator through Openshift Console (preferred method)
+
+From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for turbonomic. Select the non-community, non-marketplace option. Proceed with the installation of the default configuration in your project. 
+
+![image](https://user-images.githubusercontent.com/34694236/136453772-80ffc2a5-6a8a-410d-9730-1ec1d5c5526d.png)
+
+#### Step 2b: Deploy the t8c-operator through the CLI 
+
+
+#### Step 3: Create an xl-release CRD resource from the Installed Operator
+
+1. Go to Installed Operators, and click into the The Turbonomic Platform Operator that was installed in step 2
+2. Click 'create instance' under Provided APIs for turbonomic platform operator 
+
+![image](https://user-images.githubusercontent.com/34694236/136454150-98988dcc-7159-4ece-b991-349f666e2919.png)
+
+3. In the next screen, define the following values for the CRD.
+
+Key                 |  Value                   | Description           
+-----------------            | --------------------     | -------------
+openshiftingress.enabled        | true | exposes the UI over an Openshift route
+
+
 ## II. Install Kubeturbo
 
 #### Step 1: Create a namespace for kubeturbo
