@@ -66,7 +66,7 @@ Create a namespace with the name 'turbonomic'.
 oc create ns turbonomic
 ```
 
-#### Step 2: Deploy the t8c-operator 
+#### Step 2a: Deploy the t8c-operator 
 
 ##### From the Openshift Console
 
@@ -91,6 +91,12 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 ```
 
 You should now see the operator installed and running in your turbonomic project
+
+#### Step 2b: Grant the turbonomic service account access to anyuid SCC 
+
+```
+oc adm policy add-scc-to-group anyuid system:serviceaccounts:turbonomic
+```
 
 #### Step 3: Create a CRD from the Installed Operator
 
