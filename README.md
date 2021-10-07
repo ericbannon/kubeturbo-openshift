@@ -92,19 +92,46 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 
 You should now see the operator installed and running in your turbonomic project
 
-#### Step 3: Create an xl-release CRD resource from the Installed Operator
+#### Step 3: Create a CRD from the Installed Operator
+
+##### From the Openshift Console
 
 1. Go to Installed Operators, and click into the The Turbonomic Platform Operator that was installed in step 2
 2. Click 'create instance' under Provided APIs for turbonomic platform operator 
 
 ![image](https://user-images.githubusercontent.com/34694236/136454150-98988dcc-7159-4ece-b991-349f666e2919.png)
 
-3. In the next screen, define the following values for the CRD.
+###### Expose over Openshift Route
+
+3. In the next screen, define the following values for the CRD to expose Turbonomic over a route. 
 
 Key                 |  Value                   | Description           
 -----------------            | --------------------     | -------------
 openshiftingress.enabled        | true | exposes the UI over an Openshift route
 
+##### From the CLI
+
+If you prefer to deploy the CRD from the CLI, you can simply use the sample one included in this repo which has the default configuration and openshift ingress enabled instead of steps 1-3 above. 
+
+```
+oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/t8c/sample-crd-t8c.yaml
+```
+
+#### Step 4: Verify Turbonomic is Accessible and Create Password Credentials
+
+1. Get the route for the Turbonomic API
+
+```
+oc get route -n turbonomic
+```
+
+2. Go to your browser and access the route over https
+
+3. When prompted, create your administrator password 
+
+![image](https://user-images.githubusercontent.com/34694236/136471257-167b2729-7dfb-48a4-a5cc-b9954262ac82.png)
+
+You are now ready to proceed to installing kubeturbo in the cluster.
 
 ## II. Install Kubeturbo
 
