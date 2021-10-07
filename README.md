@@ -1,4 +1,9 @@
-# kubeturbo-openshift
+# Guide to Install & Configure Turbonomic (with Kubeturbo) on Openshift 
+
+## Turbonomic 
+
+
+## Kubeturbo
 
 The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Operator") can be quickly installed on your Openshfit cluster(s). This can be done through Openshift Console under the operator catalog, or directly through the CLI. Kubeturbo operator will run as a single pod deployment of kubeturbo per cluster, with the following resources installed in the Openshift Cluster:
 
@@ -12,7 +17,7 @@ The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Op
 * Cluster Role 
 * RoleBinding
 
-## Requirements
+### Requirements
 * Kubernetes version 1.8 or higher, OpenShift release 3.4 or higher, including any k8s upstream compliant distribution
 * Turbonomic Server version 5.9 or higher is installed, running, and the following information:
   * Turbonomic Server URL https://
@@ -32,9 +37,9 @@ The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Op
 * One kubeturbo pod will be deployed per cluster or per control plane when using stretch clusters. Kubeturbo pod will run with a service account with a cluster-admin role
 * This pod will typically run with no more than 512 Mg Memory, less than 1 core or 1 GHz CPU, and maximum volume space of 10 G.
 
-## Instructions
+### Instructions
 
-### Step 1: Create a namespace for kubeturbo
+#### Step 1: Create a namespace for kubeturbo
 
 Create a namespace with any name you would like. In our example, we will use the name 'turbo'. 
 
@@ -42,13 +47,13 @@ Create a namespace with any name you would like. In our example, we will use the
 oc create ns turbo
 ```
 
-### Step 2: Deploy kubeturbo Operator through Openshift Console (preferred method)
+#### Step 2: Deploy kubeturbo Operator through Openshift Console (preferred method)
 
 From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for kubeturbo. Select the non-community, non-marketplace option. Proceed with the installation of the default configuration in your project. 
 
 ![image](https://user-images.githubusercontent.com/34694236/136431873-4f63f032-5198-445f-9b27-1bcefa65d820.png)
 
-### Step 3: Create a kubeturbo CRD resource from the Installed Operator
+#### Step 3: Create a kubeturbo CRD resource from the Installed Operator
 
 1. Go to Installed Operators, and click into the Kubeturbo operator that was installed in step 2
 2. Click 'create instance' under Provided APIs for kubeturbo operator 
