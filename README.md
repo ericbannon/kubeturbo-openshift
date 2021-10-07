@@ -191,9 +191,6 @@ You should now see the operator installed and running in your turbo project. You
 
 1. Go to Installed Operators, and click into the Kubeturbo operator that was installed in step 2
 2. Click 'create instance' under Provided APIs for kubeturbo operator 
-
-![image](https://user-images.githubusercontent.com/34694236/136433519-1ed63794-1271-4b44-ac18-b4ff6a2db960.png)
-
 3. In the next screen, you must define the following values for the CRD. 
 
 Key                 |  Value                   | Description           
