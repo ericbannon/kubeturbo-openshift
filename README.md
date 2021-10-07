@@ -33,3 +33,18 @@ The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Op
 * This pod will typically run with no more than 512 Mg Memory, less than 1 core or 1 GHz CPU, and maximum volume space of 10 G.
 
 ## Instructions
+
+### Step 1: Create a namespace for kubeturbo
+
+Create a namespace with any name you would like. In our example, we will use the name 'turbo'. 
+
+```
+oc create ns turbo
+```
+
+### Step 2: Deploy kubeturbo Operator through Openshift Console (preferred method)
+
+From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for kubeturbo. Select the non-community, non-marketplace option. Proceed with the installation of the default configuration in your project. 
+
+![image](https://user-images.githubusercontent.com/34694236/136431873-4f63f032-5198-445f-9b27-1bcefa65d820.png)
+
