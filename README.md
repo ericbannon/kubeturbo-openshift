@@ -10,14 +10,14 @@ The [Turbonomic Platform Operator](https://operatorhub.io/operator/t8c "Turbonom
 
 * Operator Deployment (t8c-operator)
 * Custom Resource Definition (xl-release)
- * 21 Deployments & Services
- * 5 ConfigMaps
- * 10 PersistentVolumeClaims 
- * Service Account
- * Cluster Role 
- * RoleBinding
- * 2 Openshift Routes (one for api service, and one for topology-processing service) 
- * Secrets
+  * 21 Deployments & Services
+  * 5 ConfigMaps
+  * 10 PersistentVolumeClaims 
+  * Service Account
+  * Cluster Role 
+  * RoleBinding
+  * 2 Openshift Routes (one for api service, and one for topology-processing service) 
+  * Secrets
 
 For detailed pre-requisites, please visit [wiki page here](https://github.com/turbonomic/t8c-install/wiki/2.-Prerequisites "pre-reqs"), otherwise continue to the proceeding sections. 
 
@@ -27,12 +27,12 @@ The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Op
 
 * Operator Deployment (kubeturbo-operator)
 * Custom Resource Definition (kubeturbo-release)
- * 1 Deployment (kubeturbo pod) & Service	
- * 1 ConfigMap (for kubeturbo to connect to the Turbonomic topology processing server)
- * Service Account
- * Cluster Role 
- * RoleBinding
- * Secrets
+  * 1 Deployment (kubeturbo pod) & Service	
+  * 1 ConfigMap (for kubeturbo to connect to the Turbonomic topology processing server)
+  * Service Account
+  * Cluster Role 
+  * RoleBinding
+  * Secrets
 
 ### Requirements
 * Kubernetes version 1.8 or higher, OpenShift release 3.4 or higher, including any k8s upstream compliant distribution
