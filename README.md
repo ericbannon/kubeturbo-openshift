@@ -48,3 +48,21 @@ From the Openshift Console, go to OperatorHub, select the project you just creat
 
 ![image](https://user-images.githubusercontent.com/34694236/136431873-4f63f032-5198-445f-9b27-1bcefa65d820.png)
 
+### Step 3: Create a kubeturbo CRD resource from the Installed Operator
+
+1. Go to Installed Operators, and click into the Kubeturbo operator that was installed in step 2
+2. Click 'create instance' under Provided APIs for kubeturbo operator 
+
+![image](https://user-images.githubusercontent.com/34694236/136433519-1ed63794-1271-4b44-ac18-b4ff6a2db960.png)
+
+3. In the next screen, you must define the following values for the CRD. 
+
+Key                 |  Value                   | Description           
+-----------------   | --------------------     | -------------
+turboServer         | https://Turbo_server_URL | 
+opsManagerUserName: | Turbo_username           |
+opsManagerPassword: | Turbo_password           | 
+targetName:         | Name_Each_Cluster        |
+
+
+
