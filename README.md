@@ -172,7 +172,11 @@ restAPIConfig.opsManagerPassword: | Turbo_password           | configured during
 targetConfig.targetName:         | Name_Each_Cluster        | a unique name for the managed kubeturbo cluster
 args.sccsupport                  | *                        | Include a value of * in order to enable support of actions that move container pods
 
-```
+
 Note: It is reccomended to configure the argument for sccsupport if you plan on testing move actions for pods. 
-```  
+
+-- INCOMPLETE. TO BE COMPLETED ... 
+
+... 
+
 
