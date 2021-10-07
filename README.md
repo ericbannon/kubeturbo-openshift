@@ -1,23 +1,38 @@
 # Quickstart Install Guide: Turbonomic with Kubeturbo on Openshift 
 
-The following guide in intended to provide quick start intructions on how to install and configure Turbonomi with Kubeturbo on Openshift. For full intstructions on Multi-Node Deployment of Turbonomic on Kubernetes, please visit the [Turbonomic Wiki Instructions](https://github.com/turbonomic/t8c-install/wiki/1.-Turbonomic-MultiNode-Deployment-Overview "tc8s instructions").
+The following guide in intended to provide quick start intructions on how to install and configure Turbonomic with Kubeturbo on Openshift. For full intstructions on Multi-Node Deployment of Turbonomic on Kubernetes, please visit the [Turbonomic Wiki Instructions](https://github.com/turbonomic/t8c-install/wiki/1.-Turbonomic-MultiNode-Deployment-Overview "tc8s instructions").
+
+![image](https://user-images.githubusercontent.com/34694236/136449047-31b6d00e-18f5-4854-86dd-c9dbd9c78948.png)
 
 ## Turbonomic 
 
+The [Turbonomic Platform Operator](https://operatorhub.io/operator/t8c "Turbonomic Platform Operator") can be quickly installed on your Openshfit cluster(s). This can be done through Openshift Console under the operator catalog, or directly through the CLI. The Turbonomic Platform is deployed as a set of containerized micro-services owned and managed by the Operator, and covers varios components across mediation, abtraction, analysis, automation, presentation, and more. For a more detailed description, the Turbonomic architecture can be viewed [here](https://github.com/turbonomic/t8c-install/wiki/1.-Turbonomic-MultiNode-Deployment-Overview#planning-the-deployment "tc8s-arch"). The following meaningful resources will be installed into the Openshift Cluster:
+
+* Operator Deployment (t8c-operator)
+* Custom Resource Definition (xl-release)
+ * 21 Deployments & Services
+ * 5 ConfigMaps
+ * 10 PersistentVolumeClaims 
+ * Service Account
+ * Cluster Role 
+ * RoleBinding
+ * 2 Openshift Routes (one for api service, and one for topology-processing service) 
+ * Secrets
+
+For detailed pre-requisites, please visit [wiki page here](https://github.com/turbonomic/t8c-install/wiki/2.-Prerequisites "pre-reqs"), otherwise continue to the proceeding sections. 
 
 ## Kubeturbo
 
-The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Operator") can be quickly installed on your Openshfit cluster(s). This can be done through Openshift Console under the operator catalog, or directly through the CLI. Kubeturbo operator will run as a single pod deployment of kubeturbo per cluster, with the following resources installed in the Openshift Cluster:
+The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Operator") can be quickly installed on your Openshfit cluster(s). This can be done through Openshift Console under the operator catalog, or directly through the CLI. Kubeturbo operator will run as a single pod deployment of kubeturbo per cluster, with the following meaningful resources installed into the Openshift Cluster:
 
-* Custom Resource Definition (kubeturbo)
-* Namespace
-* Deployment	
-* ReplicaSet
-* Pod (kubeturbo)
-* ConfigMap for kubeturbo to connect to the Turbonomic server
-* Service Account
-* Cluster Role 
-* RoleBinding
+* Operator Deployment (kubeturbo-operator)
+* Custom Resource Definition (kubeturbo-release)
+ * 1 Deployment (kubeturbo pod) & Service	
+ * 1 ConfigMap (for kubeturbo to connect to the Turbonomic topology processing server)
+ * Service Account
+ * Cluster Role 
+ * RoleBinding
+ * Secrets
 
 ### Requirements
 * Kubernetes version 1.8 or higher, OpenShift release 3.4 or higher, including any k8s upstream compliant distribution
@@ -39,7 +54,11 @@ The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Op
 * One kubeturbo pod will be deployed per cluster or per control plane when using stretch clusters. Kubeturbo pod will run with a service account with a cluster-admin role
 * This pod will typically run with no more than 512 Mg Memory, less than 1 core or 1 GHz CPU, and maximum volume space of 10 G.
 
-### Instructions
+## Instructions
+
+## I. Install The Turbonomic Platform
+
+## II. Install Kubeturbo
 
 #### Step 1: Create a namespace for kubeturbo
 
@@ -72,5 +91,7 @@ restAPIConfig.opsManagerPassword: | Turbo_password           | configured during
 targetConfig.targetName:         | Name_Each_Cluster        | a unique name for the managed kubeturbo cluster
 args.sccsupport                  | *                        | Include a value of * in order to enable support of actions that move container pods
 
-
+```
+Note: It is reccomended to configure the argument for sccsupport if you plan on testing move actions for pods. 
+```  
 
