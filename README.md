@@ -92,18 +92,25 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 
 You should now see the operator installed and running in your turbonomic project
 
-#### Step 2b: Grant the turbonomic service account access SCC
+#### Step 2b: Accomodate SCC, or Grant the turbonomic service account access to anyuid
 
-If you are deploying on Openshift, you need to use the group id from the uid-range assigned to the project:
+When deploying on Openshift, you need to use the group id from the uid-range assigned to the turbonomic project. This can be done by running ```oc describe project -n turbonomic``` and looking for the following annotations:
+
+```
+   openshift.io/sa.scc.supplemental-groups=1000660000/10000
+			openshift.io/sa.scc.uid-range=1000660000/10000
+```
+
+You would then take the first group id and include that in the crd yaml. See step 3 for more details. 
 
 ```
 spec:
   global:
     securityContext:
-      fsGroup: 1000630000
+      fsGroup: 1000660000
 ```
 
-Or you can change the security context of the project to the 'anyuid' SCC:
+Or, optionally, you can just change the security context of the project to the 'anyuid' SCC:
 
 ```
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:turbonomic
@@ -118,17 +125,18 @@ oc adm policy add-scc-to-group anyuid system:serviceaccounts:turbonomic
 
 ![image](https://user-images.githubusercontent.com/34694236/136454150-98988dcc-7159-4ece-b991-349f666e2919.png)
 
-###### Expose over Openshift Route
-
-3. In the next screen, define the following values for the CRD to expose Turbonomic over a route. 
+3. In the next screen, define the following values for the CRD
 
 Key                 |  Value                   | Description           
 -----------------            | --------------------     | -------------
 openshiftingress.enabled        | true | exposes the UI over an Openshift route
+global.securityContext.fsGroup  | group id for your project 's uid-range | group id from the uid-range assigned to the turbonomic project. *If assigned anyuid, you do not need this value assigned* 
 
 ##### From the CLI
 
 If you prefer to deploy the CRD from the CLI, you can simply use the sample one included in this repo which has the default configuration and openshift ingress enabled instead of steps 1-3 above. 
+
+*Note: If you did not grant the turbonomic service account access to anyuid, please modify the yaml file below with your fsGroup group id from the uid-range assigned to the turbonomic project*
 
 ```
 oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/t8c/sample-crd-t8c.yaml
@@ -136,13 +144,13 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 
 #### Step 4: Verify Turbonomic is Accessible and Create Password Credentials
 
-1. Get the route for the Turbonomic API
+1. Get the route for the Turbonomic API.
 
 ```
 oc get route -n turbonomic
 ```
 
-2. Go to your browser and access the route over https
+2. Go to your browser and access the route over https.
 
 3. When prompted, create your administrator password 
 
@@ -154,17 +162,35 @@ You are now ready to proceed to installing kubeturbo in the cluster.
 
 #### Step 1: Create a namespace for kubeturbo
 
-Create a namespace with any name you would like. In our example, we will use the name 'turbo'. 
+Create a namespace with the name 'turbo'. 
 
 ```
 oc create ns turbo
 ```
 
-#### Step 2: Deploy kubeturbo Operator through Openshift Console (preferred method)
+#### Step 2: Deploy kubeturbo Operator
+
+##### From the Openshift Console
 
 From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for kubeturbo. Select the non-community, non-marketplace option. Proceed with the installation of the default configuration in your project. 
 
 ![image](https://user-images.githubusercontent.com/34694236/136431873-4f63f032-5198-445f-9b27-1bcefa65d820.png)
+
+##### From the CLI 
+
+The Operator can also be easily installed through the CLI, or your automation tooling, using an OperatorGroup and Subscription resource. More documentation on this can be found [here](https://docs.openshift.com/container-platform/4.8/operators/user/olm-installing-operators-in-namespace.html#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace "CLI install of operators")
+
+1. Deploy the OperatorGroup 
+```
+oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/kubeturbo/kubeturbo-operatorgroup.yaml
+```
+
+2. Deploy the Subscription 
+```
+oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/kubeturbo/kubeturbo-operatorsub.yaml
+```
+
+You should now see the operator installed and running in your turbo project
 
 #### Step 3: Create a kubeturbo CRD resource from the Installed Operator
 
@@ -177,14 +203,14 @@ From the Openshift Console, go to OperatorHub, select the project you just creat
 
 Key                 |  Value                   | Description           
 -----------------   | --------------------     | -------------
-serverMeta.turboServer         | https://Turbo_server_URL | The turbonomic platform's https address (lb, route, external IP, etc...) 
+serverMeta.turboServer         | https://Turbo_server_URL | The turbonomic platform's https address (Openshift route)
 restAPIConfig. opsManagerUserName: | Turbo_username           | default is administrator
 restAPIConfig.opsManagerPassword: | Turbo_password           | configured during setup of t8c
 targetConfig.targetName:         | Name_Each_Cluster        | a unique name for the managed kubeturbo cluster
 args.sccsupport                  | *                        | Include a value of * in order to enable support of actions that move container pods
 
 
-Note: It is reccomended to configure the argument for sccsupport if you plan on testing move actions for pods. 
+*Note: It is reccomended to configure the argument for sccsupport if you plan on testing move actions for pods* 
 
 -- INCOMPLETE. TO BE COMPLETED ... 
 
