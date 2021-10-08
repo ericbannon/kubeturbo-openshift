@@ -6,6 +6,8 @@ metadata:
 spec:
   global:
     repository: registry.connect.redhat.com/turbonomic
+    securityContext:
+      fsGroup: 1000630000
     externalArangoDBName: arangodb
     tag: 8.3.2
     customImageNames: false
