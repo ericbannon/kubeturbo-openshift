@@ -243,7 +243,7 @@ oc create -f <your-modified-yaml>
 
 You can verify installation through the cli or through the Openshift Console. For additional documentation and more detailed steps for validation, you can visit the wiki page here: https://github.com/turbonomic/t8c-install/wiki/5.-Deployment-Validation-and-First-Time-Setup 
 
-If you would like to explore other options for exposing the Turbonomic api over a different ingress option, please see the [following page]( https://github.com/turbonomic/t8c-install/wiki/Platform-Provided-Ingress-&-OpenShift-Routes#platform-provided-ingress--openshift-routes "Ingress Options")
+If you would like to explore other options for exposing the Turbonomic api over different ingress, please see the [following page]( https://github.com/turbonomic/t8c-install/wiki/Platform-Provided-Ingress-&-OpenShift-Routes#platform-provided-ingress--openshift-routes "Ingress Options")
 
 * https://github.com/turbonomic/kubeturbo
 * https://github.com/turbonomic/t8c-install
