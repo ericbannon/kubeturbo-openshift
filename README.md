@@ -4,6 +4,8 @@ The following guide in intended to provide quick start intructions on how to ins
 
 ![image](https://user-images.githubusercontent.com/34694236/136449047-31b6d00e-18f5-4854-86dd-c9dbd9c78948.png)
 
+![image](https://user-images.githubusercontent.com/34694236/136482566-002ad93c-e524-448b-b8c6-5fd009d2f156.png)
+
 ## Turbonomic 
 
 The [Turbonomic Platform Operator](https://operatorhub.io/operator/t8c "Turbonomic Platform Operator") can be quickly installed on your Openshfit cluster(s). This can be done through Openshift Console under the operator catalog, or directly through the CLI. The Turbonomic Platform is deployed as a set of containerized micro-services owned and managed by the Operator, and covers varios components across mediation, abtraction, analysis, automation, presentation, and more. For a more detailed description, the Turbonomic architecture can be viewed [here](https://github.com/turbonomic/t8c-install/wiki/1.-Turbonomic-MultiNode-Deployment-Overview#planning-the-deployment "tc8s-arch"). The following meaningful resources will be installed into the Openshift Cluster:
@@ -58,7 +60,7 @@ The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Op
 
 ## I. Install The Turbonomic Platform
 
-#### Step 1: Create a namespace for turbonomic
+#### Step 1: Create the namespace
 
 Create a namespace with the name 'turbonomic'. 
 
@@ -70,9 +72,11 @@ oc create ns turbonomic
 
 ##### From the Openshift Console
 
-From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for turbonomic. Select the non-community, non-marketplace option. Proceed with the installation of the default configuration in your project. 
+From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for turbonomic. Select the non-community, non-marketplace option. 
 
-You should now see the operator installed and running in your turbonomic project.
+![image](https://user-images.githubusercontent.com/34694236/136482671-94337cae-2851-4b25-b814-9262efebe551.png)
+
+Proceed with the installation of the default configuration in your project. You should now see the operator installed and running in your turbonomic project.
 
 ##### From the CLI
 
@@ -90,13 +94,13 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 
 You should now see the operator installed and running in your turbonomic project
 
-#### Step 3: Accomodate SCC, or Grant the turbonomic service account access to anyuid
+#### Step 3: Assign SCC or Grant the turbonomic service account access to anyuid
 
 When deploying on Openshift, you need to use the group id from the uid-range assigned to the turbonomic project. This can be done by running ```oc describe project -n turbonomic``` and looking for the following annotations:
 
 ```
-   openshift.io/sa.scc.supplemental-groups=1000660000/10000
-			openshift.io/sa.scc.uid-range=1000660000/10000
+  	openshift.io/sa.scc.supplemental-groups=1000660000/10000
+	openshift.io/sa.scc.uid-range=1000660000/10000
 ```
 
 You would then take the first group id and include that in the crd yaml. See step 3 for more details. 
@@ -114,7 +118,7 @@ Or, optionally, you can just change the security context of the project to the '
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:turbonomic
 ```
 
-#### Step 4: Create the Turbonomic CRD 
+#### Step 4: Create the CRD 
 
 ##### From the Openshift Console
 
@@ -137,7 +141,7 @@ If you prefer to deploy the CRD from the CLI, you can simply use the sample one 
 oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/main/operator-cli-install/t8c/sample-crd-t8c.yaml
 ```
 
-#### Step 4: Verify Turbonomic is Accessible and Create Password Credentials
+#### Step 4: Verify Install and Create Password Credentials
 
 1. Get the route for the Turbonomic API.
 
@@ -145,9 +149,9 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 oc get route -n turbonomic
 ```
 
-2. Go to your browser and access the route over https.
+2. Go to your browser and access the route for the api over https.
 
-3. When prompted, create your administrator password 
+3. When prompted, create your administrator password and add your license
 
 ![image](https://user-images.githubusercontent.com/34694236/136471257-167b2729-7dfb-48a4-a5cc-b9954262ac82.png)
 
@@ -155,7 +159,7 @@ You are now ready to proceed to installing kubeturbo in the cluster.
 
 ## II. Install Kubeturbo
 
-#### Step 1: Create a namespace for kubeturbo
+#### Step 1: Create the namespace
 
 Create a namespace with the name 'turbo'. 
 
@@ -163,11 +167,15 @@ Create a namespace with the name 'turbo'.
 oc create ns turbo
 ```
 
-#### Step 2: Deploy kubeturbo Operator
+#### Step 2: Deploy the kubeturbo-operator
 
 ##### From the Openshift Console
 
-From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for kubeturbo. Select the non-community, non-marketplace option. Proceed with the installation of the default configuration in your project. 
+From the Openshift Console, go to OperatorHub, select the project you just created from step 1, and search for kubeturbo. Select the non-community, non-marketplace option. 
+
+![image](https://user-images.githubusercontent.com/34694236/136482880-7ee3965f-306f-4be6-8595-133399c8d260.png)
+
+Proceed with the installation of the default configuration in your project. You should now see the operator installed and running in your turbo project.
 
 ##### From the CLI 
 
@@ -185,7 +193,7 @@ oc create -f https://raw.githubusercontent.com/ericbannon/kubeturbo-openshift/ma
 
 You should now see the operator installed and running in your turbo project. You can verify installation through the cli or through the Openshift Console. 
 
-#### Step 3: Create a kubeturbo CRD 
+#### Step 3: Create the CRD 
 
 ##### From the Openshift Console
 
@@ -201,7 +209,7 @@ restAPIConfig.opsManagerPassword: | Turbo_password           | configured during
 targetConfig.targetName:         | Name_Each_Cluster        | a unique name for the managed kubeturbo cluster
 args.sccsupport                  | *                        | Include a value of * in order to enable support of actions that move container pods
 
-*Note: It is reccomended to configure the argument for sccsupport if you plan on testing move actions for pods* 
+*Note: It is reccomended to configure add a value of * to the sccsupport key if you plan on testing move actions for pods* 
 
 ##### From the CLI 
 
@@ -233,5 +241,10 @@ spec:
 oc create -f <your-modified-yaml> 
 ```
 
-You can verify installation through the cli or through the Openshift Console. 
+You can verify installation through the cli or through the Openshift Console. For additional documentation and more detailed steps for validation, you can visit the wiki page here: https://github.com/turbonomic/t8c-install/wiki/5.-Deployment-Validation-and-First-Time-Setup 
+
+If you would like to explore other options for exposing the Turbonomic api over a different ingress option, please see the [following page]( https://github.com/turbonomic/t8c-install/wiki/Platform-Provided-Ingress-&-OpenShift-Routes#platform-provided-ingress--openshift-routes "Ingress Options")
+
+https://github.com/turbonomic/kubeturbo
+https://github.com/turbonomic/t8c-install
 
