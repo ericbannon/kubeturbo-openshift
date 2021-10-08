@@ -34,7 +34,7 @@ The [Kubeturbo Operator](https://operatorhub.io/operator/kubeturbo "Kubeturbo Op
   * RoleBinding
   * Secrets
 
-### Requirements
+## Requirements
 * Kubernetes version 1.8 or higher, OpenShift release 3.4 or higher, including any k8s upstream compliant distribution
 * Turbonomic Server version 5.9 or higher is installed, running, and the following information:
   * Turbonomic Server URL https://
