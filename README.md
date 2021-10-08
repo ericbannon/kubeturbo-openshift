@@ -245,6 +245,6 @@ You can verify installation through the cli or through the Openshift Console. Fo
 
 If you would like to explore other options for exposing the Turbonomic api over a different ingress option, please see the [following page]( https://github.com/turbonomic/t8c-install/wiki/Platform-Provided-Ingress-&-OpenShift-Routes#platform-provided-ingress--openshift-routes "Ingress Options")
 
-https://github.com/turbonomic/kubeturbo
-https://github.com/turbonomic/t8c-install
+* https://github.com/turbonomic/kubeturbo
+* https://github.com/turbonomic/t8c-install
 
